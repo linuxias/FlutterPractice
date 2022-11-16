@@ -120,3 +120,78 @@ print(names)  // {Test1, Test2}
 print(names.contains('Test')  // false 
 ```
 
+## 함수
+### Optional Paramter
+함수 파라미터 중 필수로 전달하지 않아도 되는 파라미터를 설정할 수 있다. 이러한 파라미터를 Optional Paramter라고 한다. 해당 파라미터를 설정하는 방법은 대괄호를 이용한다.
+
+추가로 Optional Parameter는 초기화가 필수이다. Optional Paramter를 전달하지 않을 시 어떤 값으로 지정되어야 할 지 추론할 수 없기 때문이다.
+
+```dart
+void main() {
+  testFunc(10);
+}
+
+testFunc(int x, [int y = 2, int z = 3]) {
+  print(x + y + z) // 15
+}
+```
+
+### Named Parameter
+Named paramter는 이름이 있는 파라미터이다. 각각의 이름이 있기 때문에 파라미터 전달 시 순서가 중요하지는 않다.
+
+Named paramter를 선언하는 방법은 `required` 예약어를 사용하는 것이다. 사용 시 파라미터들을 `{ }` 로 묶어줘야한다.
+
+```dart
+void main() {
+  testFunc(z:30, x:10, y:20); // Named parameter 
+}
+
+testFunc({
+  required int x, 
+  required int y, 
+  required int z}) {
+  print(x + y + z) // 60
+}
+```
+
+### Named + Optional parameter
+```dart
+void main() {
+  testFunc(x:10, y:20); // Named parameter 
+}
+
+testFunc({
+  required int x, 
+  required int y, 
+  int z = 30}) {
+  print(x + y + z) // 60
+}
+```
+
+### Arrow function
+Arrow function은 함수 구현 부가 한 줄일 떄 `{}` 대신 => 를 이용하여 구현부를 작성할 수 있다. 예를 들어 두 수의 합을 구하는 함수에서는 아래와 같이 변경이 가능하다.
+```dart
+int sumTwoNumber(int x, int y) {
+  return x + y;
+}
+
+// Arrow function
+int sumTwoNumber(int x, int y) => x + y;
+```
+
+### Typedef
+Typedef 은 함수형을 간단하게 정의하여 사용할 수 있다.
+> typedef 함수명 = 반환값 Function(파라미터);
+
+```dart
+void main() {
+  Operation operation = add;
+  int result = operation(10, 20);
+  print(result) // 30
+}
+
+typedef Operation = int Function(int x, int y);
+
+int add(int x, int y) => x + y;
+```
+
